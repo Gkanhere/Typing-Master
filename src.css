@@ -1,0 +1,138 @@
+#high_score{
+  font-size: clamp(8px , 4vw , 17px);
+  position: absolute;
+  margin-top: 5%;
+  text-shadow: 5px 6px  5px  rgb(35, 34, 35);
+  font-weight: bold;
+}
+
+
+#start_button
+{
+
+  
+    font-size: clamp(10px , 4vw , 20px);
+   text-align: center;
+   text-shadow: 5px 6px  5px  rgb(118, 2, 129);
+   border:none;
+   background-color: #d36f22;
+   border-radius: 5px;
+   width: 30%;
+  overflow: hidden;
+   box-shadow: 5px 6px  6px  rgba(25, 13, 6, 0.8);
+   color: aliceblue;
+}
+
+
+#title
+{
+    font-size: clamp(20px , 4vw , 30px);
+    text-align: center;
+}
+
+#start_popup_box
+{
+
+    font-size: clamp(10px , 4vw , 20px);
+    background-color: rgba(215, 56, 38,0.8);
+    padding: 1%;
+    width: fit-content;
+     opacity: 0%;
+   margin-top: 5%;
+
+}
+
+
+
+.button
+{
+
+  padding: 1%;
+ margin-left: 5%;
+ margin-right: 5%;
+ box-shadow: -1px -1px  10px 10px  rgba(12, 15, 10, 0.5);
+
+ border: none;
+ color: rgb(97, 75, 75);  
+
+}
+
+#output_to_display
+{
+    color: rgb(10, 6, 121);
+    font-weight: bold;
+    text-align: center;
+    padding-top: 0;
+    font-size: 25px;
+    
+  background-color: rgba(120, 113, 113, 0.1);
+    border: none;
+}
+
+pre{
+    color: red;
+}
+
+#body
+{
+
+  display: none; display: none;
+}
+
+
+#Restart,#home
+{
+    width: 20%;
+    padding: 0.8%;
+    margin-left: 20%;
+    margin-bottom: 5%;
+    overflow: hidden;
+}
+
+
+#display_score
+{
+    display: flex;
+    justify-content: center;
+
+    font-size: clamp(10px , 4vw , 20px);
+    background-color: rgba(215, 56, 38,0.8);
+    padding: 1%;
+    width: fit-content;
+     opacity: 0;
+   margin-top: -8%;
+   position: relative;
+  
+}
+
+#input_from_user
+{
+  text-align: center;
+  font-weight: bold;
+  border: none;
+  font-size: 20px;
+}
+body
+{
+  background-color: rgba(13, 13, 13, 0.3);
+ 
+}
+
+img
+{
+  filter:drop-shadow(12px 10px 12px rgb(2, 2, 2))
+}
+
+#new_score
+{
+  
+  font-size: clamp(10px , 4vw , 20px);
+  background-color: rgba(215, 56, 38,0.8);
+  overflow: hidden;
+  padding: 1%;
+  width: fit-content;
+  box-shadow: 10px 10px  5px 5px  rgba(12, 15, 10, 0.5);
+ margin-top: -30%;
+ position: relative;
+opacity: 0;
+}

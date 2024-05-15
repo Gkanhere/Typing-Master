@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="src.css">
+
+</head>
+<body>
+
+  <div id="high_score">High Score </div>
+
+  <h2 id="title">Typing Speed Booster</h2>
+    
+    <div id="body_game_start">
+  <center>
+    <select id="game_play_mode" >
+        <option value="5000" >Easy</option>
+        <option value="3500" >Medium</option>
+        <option value="2500" >Hard</option>
+      </select> <br>
+     <img src="images/typinglogo1.png" ><br>
+
+    <button id="start_button" onclick=" click_start_button()">START</button></center>
+  
+   
+
+<center> 
+    
+    <div id="start_popup_box">Hey Player Ready Let's Now<br> Game Start In Few Seconds  </div></center>
+</div>
+
+<div id="body">
+
+   <button id="Restart" onclick="restart_game()" >Restart</button><button id="home" onclick="back_to_home()">Home</button>
+    
+    <textarea rows="2" style="width: 100%;" readonly id="output_to_display"></textarea>
+    <center>  <button id="correct_button"  class="button">Correct</button>   <button id="incorrect_button" class="button"> Incorrect</button> <button id="Score" class="button">Score</button> </center>
+    <textarea  rows="3" style="width: 100%;"  id="input_from_user" autofocus placeholder=" Sentance Type Here"></textarea>
+
+  <center>  <img src="images/keyboard1.png" id="keyboard_image"></center>
+    
+  </div>
+  
+<center>
+   <div id="display_score">    Youre Score Is <br>
+</div>
+
+<div id="new_score">
+
+   Well Done 
+   <br>New Score Added
+</div>
+
+</center>
+    
+</body>
+<script src="javascript1.js"></script>
+</html>
