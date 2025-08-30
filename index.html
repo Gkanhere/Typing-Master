@@ -1,60 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="src.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Speed Tester</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
+    header {
+      text-align: center;
+      padding: 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .game-box {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+      text-align: center;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .quote {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      min-height: 60px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      font-size: 1rem;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      resize: none;
+    }
+
+    .stats {
+      margin-top: 20px;
+      font-size: 1.1rem;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background: #00ffc3;
+      color: #000;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #00d4a6;
+    }
+
+    footer {
+      background: rgba(0,0,0,0.4);
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer h3 {
+      margin-bottom: 10px;
+    }
+
+    .projects {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .projects a {
+      color: #00ffc3;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 18px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .projects a:hover {
+      background: #00ffc3;
+      color: #000;
+    }
+
+    @media (max-width: 600px) {
+      .quote {
+        font-size: 1rem;
+      }
+      textarea {
+        height: 100px;
+      }
+    }
+
+    .correct { color: #28a745; font-weight: bold; }
+    .wrong { color: #dc3545; font-weight: bold; text-decoration: underline; }
+  </style>
 </head>
 <body>
 
-  <div id="high_score">High Score </div>
+  <header> ✩░▒▓▆▅▃▂▁𝐓𝐘𝐏𝐈𝐍𝐆 𝐌𝐀𝐒𝐓𝐄𝐑▁▂▃▅▆▓▒░✩</header>
 
-  <h2 id="title">Typing Speed Booster</h2>
-    
-    <div id="body_game_start">
-  <center>
-    <select id="game_play_mode" >
-        <option value="5000" >Easy</option>
-        <option value="3500" >Medium</option>
-        <option value="2500" >Hard</option>
-      </select> <br>
-     <img src="images/typinglogo1.png" ><br>
+  <main>
+    <div class="game-box">
+      <div class="quote" id="quote">Click "Start Test" to begin...</div>
+      <textarea id="input" placeholder="Start typing here..." disabled></textarea>
+      <div class="stats" id="stats">WPM: 0 | Accuracy: 0%</div>
+      <button onclick="startTest()">Start Test</button>
+    </div>
+  </main>
 
-    <button id="start_button" onclick=" click_start_button()">START</button></center>
-  
-   
+  <footer>
+    <h3> Our Other Services</h3>
+    <div class="projects" id="projects"></div><br>
 
-<center> 
-    
-    <div id="start_popup_box">Hey Player Ready Let's Now<br> Game Start In Few Seconds  </div></center>
-</div>
+          Contact Us | &#9993; 
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=gkanhere11@gmail.com" style="color:#00ffc3" target="_blank"  >gkanhere11@gmail.com</a> | 
+<a href="https://github.com/Gkanhere" target="_blank" style="color:#00ffc3">GitHub</a>
 
-<div id="body">
+  </footer>
 
-   <button id="Restart" onclick="restart_game()" >Restart</button><button id="home" onclick="back_to_home()">Home</button>
-    
-    <textarea rows="2" style="width: 100%;" readonly id="output_to_display"></textarea>
-    <center>  <button id="correct_button"  class="button">Correct</button>   <button id="incorrect_button" class="button"> Incorrect</button> <button id="Score" class="button">Score</button> </center>
-    <textarea  rows="3" style="width: 100%;"  id="input_from_user" autofocus placeholder=" Sentance Type Here"></textarea>
+  <script>
+    const quotes = [
+      "Data analysis is not just about collecting numbers, but about transforming raw information into meaningful insights that help organizations make smarter decisions.",
+  "Artificial intelligence and machine learning are revolutionizing industries by automating complex tasks, enhancing productivity, and creating new opportunities for innovation.",
+  "Successful teamwork requires clear communication, mutual respect, and a shared commitment to achieving common goals despite challenges and differences.",
+  "Cloud computing allows businesses to scale their operations rapidly, reduce infrastructure costs, and provide services with greater flexibility and security.",
+  "A professional approach to problem-solving involves analyzing the root cause, exploring multiple solutions, and implementing the most efficient and sustainable strategy.",
+  "Continuous learning and adaptation are essential for professionals to remain competitive in an ever-changing technological landscape.",
+  "Effective project management requires planning, coordination, risk assessment, and timely execution to achieve desired outcomes.",
+  "Good leadership is about inspiring others, fostering collaboration, and making informed decisions that benefit the organization as a whole.",
+  "Cybersecurity is critical for protecting sensitive data, maintaining customer trust, and ensuring business continuity in the digital age.",
+  "Software development is an iterative process that demands attention to detail, testing, and optimization to produce high-quality applications.",
+  "Digital marketing combines creativity, analytics, and strategic planning to reach target audiences and drive measurable results.",
+  "Customer-centric organizations focus on understanding needs, delivering value, and continuously improving the overall experience.",
+  "Business intelligence tools help companies transform complex datasets into actionable insights to drive growth and efficiency.",
+  "Time management and prioritization are key skills that enhance productivity and reduce stress in professional environments.",
+  "Innovation thrives in environments that encourage experimentation, tolerate failure, and reward creative problem-solving.",
+  "Networking and relationship-building are essential for career growth and professional development in any industry.",
+  "Sustainable business practices involve considering environmental, social, and governance factors when making decisions.",
+  "Data privacy regulations require organizations to handle personal information responsibly and comply with legal requirements.",
+  "Effective communication is about clarity, active listening, and tailoring the message to suit different audiences.",
+  "The ability to analyze trends and anticipate market changes can provide a competitive edge for any business.",
+  "Agile methodologies promote flexibility, iterative development, and continuous improvement in project delivery.",
+  "Technical writing involves clearly explaining complex concepts so that they are easily understood by the target audience.",
+  "Professional ethics guide decision-making and behavior, ensuring integrity, accountability, and trustworthiness.",
+  "Cloud-based collaboration tools enable distributed teams to work efficiently across multiple locations and time zones.",
+  "Risk management strategies involve identifying potential threats, assessing impact, and implementing mitigation plans.",
+  "Artificial intelligence applications include natural language processing, image recognition, and predictive analytics.",
+  "Continuous feedback and performance evaluations help employees grow and align their goals with organizational objectives.",
+  "User experience design focuses on creating intuitive, accessible, and enjoyable interactions for end-users.",
+  "Financial analysis involves evaluating data to assess company performance, profitability, and investment opportunities.",
+  "Change management requires careful planning, stakeholder engagement, and clear communication to ensure successful adoption.",
+  "Blockchain technology provides secure, transparent, and decentralized methods for recording transactions.",
+  "Innovation in healthcare relies on research, technology, and collaboration to improve patient outcomes.",
+  "Strategic planning involves setting objectives, analyzing resources, and defining actionable steps to achieve goals.",
+  "E-commerce platforms allow businesses to reach a global audience and offer convenient shopping experiences.",
+  "Problem-solving skills involve identifying issues, generating solutions, and implementing effective action plans.",
+  "Professional development includes continuous learning, skill enhancement, and staying updated with industry trends.",
+  "Effective negotiation requires preparation, empathy, and understanding the interests of all parties involved.",
+  "Machine learning algorithms can identify patterns in data, enabling predictive analytics and intelligent decision-making.",
+  "Cyber threats such as phishing, malware, and ransomware pose significant risks to organizations worldwide.",
+  "Human-centered design prioritizes the needs, preferences, and behaviors of users throughout the product development process.",
+  "Data visualization techniques help convey complex information in an easily understandable and actionable format.",
+  "Collaborative work environments foster creativity, knowledge sharing, and collective problem-solving.",
+  "Time-sensitive projects demand discipline, organization, and efficient workflow management to meet deadlines.",
+  "Leadership development programs aim to cultivate essential skills, including communication, decision-making, and resilience.",
+  "Professional networking platforms like LinkedIn allow individuals to connect, share knowledge, and discover career opportunities.",
+  "Continuous improvement initiatives drive efficiency, quality, and innovation across business processes.",
+  "Ethical decision-making considers moral principles, societal impact, and long-term consequences of actions.",
+  "Digital transformation involves adopting technology to optimize operations, enhance customer experience, and create value.",
+  "Cross-functional teams bring together diverse expertise to solve complex problems and deliver innovative solutions.",
+  "Effective documentation ensures that processes, code, and procedures are understandable and maintainable.",
+  "Business analytics combines data, statistical models, and predictive techniques to inform strategic decision-making.",
+  "Customer feedback is invaluable for improving products, services, and overall business performance."
 
-  <center>  <img src="images/keyboard1.png" id="keyboard_image"></center>
-    
-  </div>
-  
-<center>
-   <div id="display_score">    Youre Score Is <br>
-</div>
+    ];
 
-<div id="new_score">
+    let startTime, currentQuote;
 
-   Well Done 
-   <br>New Score Added
-</div>
+    const quoteEl = document.getElementById("quote");
+    const inputEl = document.getElementById("input");
+    const statsEl = document.getElementById("stats");
 
-</center>
-    
+    function startTest() {
+      currentQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteEl.innerHTML = currentQuote.split("").map(c => `<span>${c}</span>`).join("");
+      inputEl.value = "";
+      inputEl.disabled = false;
+      inputEl.focus();
+      startTime = new Date().getTime();
+      statsEl.textContent = "WPM: 0 | Accuracy: 0%";
+    }
+
+    inputEl.addEventListener("input", () => {
+      const typedText = inputEl.value;
+      const spans = quoteEl.querySelectorAll("span");
+
+      let correctChars = 0;
+      for (let i = 0; i < currentQuote.length; i++) {
+        if (typedText[i] == null) {
+          spans[i].classList.remove("correct", "wrong");
+        } else if (typedText[i] === currentQuote[i]) {
+          spans[i].classList.add("correct");
+          spans[i].classList.remove("wrong");
+          correctChars++;
+        } else {
+          spans[i].classList.add("wrong");
+          spans[i].classList.remove("correct");
+        }
+      }
+
+      // WPM calculation
+      const elapsedTime = (new Date().getTime() - startTime) / 1000 / 60; // minutes
+      const wordsTyped = typedText.trim().split(/\s+/).length;
+      const wpm = Math.round(wordsTyped / elapsedTime);
+
+      // Accuracy
+      const accuracy = Math.round((correctChars / currentQuote.length) * 100);
+
+      statsEl.textContent = `WPM: ${isNaN(wpm) ? 0 : wpm} | Accuracy: ${isNaN(accuracy) ? 0 : accuracy}%`;
+
+      // ✅ Sentence completed
+      if (typedText === currentQuote) {
+        const timeTaken = ((new Date().getTime() - startTime) / 1000).toFixed(1);
+        inputEl.disabled = true;
+        statsEl.textContent += ` | ⏱ Completed in ${timeTaken}s`;
+      }
+    });
+
+    // Projects
+    const projects = [
+      { name: "🌍 City to IP Finder", url: "https://yourlink1.com" },
+      { name: "📧 Email Verifier Tool", url: "https://yourlink2.com" },
+      { name: "📊 Job Title Parser", url: "https://job-title-parser-com.vercel.app/" }
+    ];
+    const projectContainer = document.getElementById("projects");
+    projects.forEach(p => {
+      const a = document.createElement("a");
+      a.href = p.url;
+      a.target = "_blank";
+      a.textContent = p.name;
+      projectContainer.appendChild(a);
+    });
+  </script>
 </body>
-<script src="javascript1.js"></script>
 </html>
